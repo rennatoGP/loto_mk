@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Loto MK</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-ia">
+                <img src="img/LOTO.IA.png" alt="">
+        </div>
+        <div class="box_title_logo"><img src="img/4023883-bot-head-robot-robotics_112865 (1).png" alt=""><h2>RobotLoto365</h2></div>
+        <div class="card-palpite">
+        <p class="title_card">Melhores palpites</p>
+
+                <div class="cards-probabilidade">
+                    <div id="palpite-melhor-bola1" class="palpite-melhor-bola"></div>
+                    <div id="palpite-melhor-bola2" class="palpite-melhor-bola"></div>
+                </div>
+
+                <div class="box-hora">
+                    <span class="hora-palpite">00:00</span>
+                    <div class="box-ultimas-hora">
+                        <select id="select-periodo">
+                            <option value="1">Última Hora</option>
+                            <option value="2">Últimas 2 Horas</option>
+                            <option value="3">Últimas 3 Horas</option>
+                            <option value="6">Últimas 6 Horas</option>
+                            <option value="12">Últimas 12 Horas</option>
+                            <option value="24">Últimas 24 Horas</option>
+                            <option value="0">Total</option>
+                        </select>
+                    </div>
+                </div>
+                <p class="title_card">Análise dos próximos jogos</p>
+
+                <div class="cards-bolas_probabilidade">
+                    <div id="palpite-bola1"><span>1º</span></div>
+                    <div id="palpite-bola2"><span>2º</span></div>
+                    <div id="palpite-bola3"><span>3º</span></div>
+                    <div id="palpite-bola4"><span>4º</span></div>
+                    <div id="palpite-bola5"><span>5º</span></div>
+                </div>
+            
+        </div>
+        
+        <div class="card-buttons">
+            <div id="fetch-data" class="fetch-data">Analizar Sorteio</div>
+            <div id="loading">
+                <div class="spinner"></div>
+                <span>IA analisando melhor oportunidade...</span>
+            </div>
+        </div>
+        <div class="card-buttons">
+            <div id="btn-toggle-historico">Mostrar Histórico</div>
+        </div>
+        <div id="historico-container" class="hidden">
+            <h2 class="title_historico">Histórico de Sorteios</h2>
+            <table id="historico">
+                <thead>
+                    <tr>
+                        <th>Sorteio</th>
+                        <th>Bola 1</th>
+                        <th>Bola 2</th>
+                        <th>Bola 3</th>
+                        <th>Bola 4</th>
+                        <th>Bola 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Histórico de sorteios será inserido aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

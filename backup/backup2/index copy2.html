@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style.css">
+        <title>Loto MK</title>
+    </head>
+    <body>
+        <div class="container">
+            <img class="img-logo" src="./img/LOTO.IA.png" alt="" srcset="">
+            <p class="text">Apostas do próximo sorteio</p>
+            <div class="card-palpite">
+                <div id="palpite-bola1"></div>
+                <div id="palpite-bola2"></div>
+                <div id="palpite-bola3"></div>
+                <div id="palpite-bola4"></div>
+                <div id="palpite-bola5"></div>
+            </div>
+            <div class="card-buttons">
+                <select id="select-periodo">
+                    <option value="1">Última Hora</option>
+                    <option value="2">Últimas 2 Horas</option>
+                    <option value="3">Últimas 3 Horas</option>
+                    <option value="6">Últimas 6 Horas</option>
+                    <option value="12">Últimas 12 Horas</option>
+                    <option value="24">Últimas 24 Horas</option>
+                    <option value="0">Total</option>
+                </select>
+                
+                <button id="fetch-data" class="fetch-data">Analizar Sorteio</button>
+                <div id="loading">
+                    <div class="spinner"></div>
+                    <span>IA analisando melhor oportunidade...</span>
+                </div>
+            </div>
+            <h2>Probabilidade</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Posição</th>
+                        <th>Paridade Mais Provável</th>
+                        <th>Probabilidade (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bola 1</td>
+                        <td id="resultado-bola1">-</td>
+                        <td id="probabilidade-bola1">-</td>
+                    </tr>
+                    <tr>
+                        <td>Bola 2</td>
+                        <td id="resultado-bola2">-</td>
+                        <td id="probabilidade-bola2">-</td>
+                    </tr>
+                    <tr>
+                        <td>Bola 3</td>
+                        <td id="resultado-bola3">-</td>
+                        <td id="probabilidade-bola3">-</td>
+                    </tr>
+                    <tr>
+                        <td>Bola 4</td>
+                        <td id="resultado-bola4">-</td>
+                        <td id="probabilidade-bola4">-</td>
+                    </tr>
+                    <tr>
+                        <td>Bola 5</td>
+                        <td id="resultado-bola5">-</td>
+                        <td id="probabilidade-bola5">-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="toggle-historico">Mostrar Histórico</button>
+            <div id="historico-container" class="hidden">
+                <h2>Histórico de Sorteios</h2>
+                <table id="historico">
+                    <thead>
+                        <tr>
+                            <th>Sorteio</th>
+                            <th>Bola 1</th>
+                            <th>Bola 2</th>
+                            <th>Bola 3</th>
+                            <th>Bola 4</th>
+                            <th>Bola 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Histórico de sorteios será inserido aqui -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="./script.js"></script>
+       
+    </body>
+</html>

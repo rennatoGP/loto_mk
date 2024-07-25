@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+           
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+           
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        input[type="number"] {
+            width: 50px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1em;
+            color: black;
+        }
+        button {
+            display: inline-block;
+            width: auto;
+            padding: 10px 20px;
+            background-color: #D5FD95;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+           
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #444950;
+        }
+        .hidden {
+            display: none;
+        }
+        #loading {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #D5FD95;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #D5FD95;
+            animation: spin 1s ease infinite;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="lottery-form">
+            <div class="form-group">
+                <label for="bola1">Bola 1:</label>
+                <input type="number" id="bola1" name="bola1" min="1" max="36" required>
+            </div>
+            <div class="form-group">
+                <label for="bola2">Bola 2:</label>
+                <input type="number" id="bola2" name="bola2" min="1" max="36" required>
+            </div>
+            <div class="form-group">
+                <label for="bola3">Bola 3:</label>
+                <input type="number" id="bola3" name="bola3" min="1" max="36" required>
+            </div>
+            <div class="form-group">
+                <label for="bola4">Bola 4:</label>
+                <input type="number" id="bola4" name="bola4" min="1" max="36" required>
+            </div>
+            <div class="form-group">
+                <label for="bola5">Bola 5:</label>
+                <input type="number" id="bola5" name="bola5" min="1" max="36" required>
+            </div>
+            <button type="submit">Adicionar Sorteio</button>
+        </form>
+        <div id="loading">
+            <div class="spinner"></div>
+            <span>IA analisando melhor oportunidade...</span>
+        </div>
+        <h2>Probabilidade</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Paridade Mais Provável</th>
+                    <th>Probabilidade (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bola 1</td>
+                    <td id="resultado-bola1">-</td>
+                    <td id="probabilidade-bola1">-</td>
+                </tr>
+                <tr>
+                    <td>Bola 2</td>
+                    <td id="resultado-bola2">-</td>
+                    <td id="probabilidade-bola2">-</td>
+                </tr>
+                <tr>
+                    <td>Bola 3</td>
+                    <td id="resultado-bola3">-</td>
+                    <td id="probabilidade-bola3">-</td>
+                </tr>
+                <tr>
+                    <td>Bola 4</td>
+                    <td id="resultado-bola4">-</td>
+                    <td id="probabilidade-bola4">-</td>
+                </tr>
+                <tr>
+                    <td>Bola 5</td>
+                    <td id="resultado-bola5">-</td>
+                    <td id="probabilidade-bola5">-</td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="toggle-historico">Mostrar Histórico</button>
+        <div id="historico-container" class="hidden">
+            <h2>Histórico de Sorteios</h2>
+            <table id="historico">
+                <thead>
+                    <tr>
+                        <th>Sorteio</th>
+                        <th>Bola 1</th>
+                        <th>Bola 2</th>
+                        <th>Bola 3</th>
+                        <th>Bola 4</th>
+                        <th>Bola 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Histórico de sorteios será inserido aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        const form = document.getElementById('lottery-form');
+        const loading = document.getElementById('loading');
+        const historicoTableBody = document.querySelector('#historico tbody');
+        const toggleHistoricoButton = document.getElementById('toggle-historico');
+        const historicoContainer = document.getElementById('historico-container');
+        let historico = [];
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const sorteio = [
+                historico.length + 1,
+                parseInt(form.bola1.value),
+                parseInt(form.bola2.value),
+                parseInt(form.bola3.value),
+                parseInt(form.bola4.value),
+                parseInt(form.bola5.value)
+            ];
+            historico.push(sorteio);
+            mostrarCarregamentoECalcular();
+            form.reset();
+        });
+
+        toggleHistoricoButton.addEventListener('click', function() {
+            historicoContainer.classList.toggle('hidden');
+            toggleHistoricoButton.textContent = historicoContainer.classList.contains('hidden') ? 'Mostrar Histórico' : 'Ocultar Histórico';
+        });
+
+        function mostrarCarregamentoECalcular() {
+            loading.style.display = 'flex';
+            setTimeout(function() {
+                loading.style.display = 'none';
+                atualizarHistorico();
+                calcularProbabilidades();
+            }, 2000);
+        }
+
+        function atualizarHistorico() {
+            historicoTableBody.innerHTML = '';
+            historico.forEach(sorteio => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${sorteio[0]}</td>
+                    <td>${sorteio[1]}</td>
+                    <td>${sorteio[2]}</td>
+                    <td>${sorteio[3]}</td>
+                    <td>${sorteio[4]}</td>
+                    <td>${sorteio[5]}</td>
+                `;
+                historicoTableBody.appendChild(row);
+            });
+        }
+
+        function calcularProbabilidades() {
+            if (historico.length === 0) {
+                return;
+            }
+
+            const contagem = {
+                bola1: { par: 0, impar: 0 },
+                bola2: { par: 0, impar: 0 },
+                bola3: { par: 0, impar: 0 },
+                bola4: { par: 0, impar: 0 },
+                bola5: { par: 0, impar: 0 }
+            };
+
+            historico.forEach(sorteio => {
+                for (let i = 1; i <= 5; i++) {
+                    const bola = sorteio[i];
+                    if (bola % 2 === 0) {
+                        contagem[bola${i}].par++;
+                    } else {
+                        contagem[bola${i}].impar++;
+                    }
+                }
+            });
+
+            for (let i = 1; i <= 5; i++) {
+                const total = historico.length;
+                const probPar = (contagem[bola${i}].par / total) * 100;
+                const probImpar = (contagem[bola${i}].impar / total) * 100;
+
+                const resultadoElement = document.getElementById(resultado-bola${i});
+                const probabilidadeElement = document.getElementById(probabilidade-bola${i});
+
+                if (probPar > probImpar) {
+                    resultadoElement.textContent = 'Par';
+                    probabilidadeElement.textContent = ${probPar.toFixed(2)}%;
+                } else {
+                    resultadoElement.textContent = 'Ímpar';
+                    probabilidadeElement.textContent = ${probImpar.toFixed(2)}%;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
